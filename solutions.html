@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Решения — ИП Вялков Е. В.</title>
+  <meta name="description" content="Решения ИП Вялков Е. В.: мобильные приложения, веб-сервисы, Telegram-боты и программы для ПК.">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="canonical" href="https://vev.github.io/solutions.html">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Решения — ИП Вялков Е. В.">
+  <meta property="og:description" content="Решения ИП Вялков Е. В.: мобильные приложения, веб-сервисы, Telegram-боты и программы для ПК.">
+  <meta property="og:url" content="https://vev.github.io/solutions.html">
+  <meta property="og:image" content="https://vev.github.io/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=PT+Serif:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="topline">
+  <div class="wrap">
+    <span>ИНН 222212136774 · ОГРНИП 321220200280775</span>
+    <a href="mailto:3750997@mail.ru">3750997@mail.ru</a>
+  </div>
+</div>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="index.html">ИП Вялков Е. В.<small>Разработка программного обеспечения</small></a>
+    <nav>
+      <div class="dropdown">
+        <a href="solutions.html" class="active">Решения</a>
+        <div class="menu" data-solutions-menu></div>
+      </div>
+      <a href="index.html#services">Услуги</a>
+      <a href="index.html#requisites">Реквизиты</a>
+      <a href="index.html#contacts">Контакты</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap page-head">
+    <div class="line"></div>
+    <h1>Решения</h1>
+    <p class="sub">Продукты, разработанные ИП Вялков Е. В.</p>
+    <div class="tabs" id="tabs"></div>
+  </div>
+
+  <div class="wrap" id="catalog">
+    <noscript><p class="empty">Для просмотра каталога включите JavaScript.</p></noscript>
+  </div>
+
+  <section style="padding-top: 0">
+    <div class="wrap">
+      <div class="cta">
+        <div>
+          <h2>Нужно решение под вашу задачу?</h2>
+          <p>Опишите задачу — предложу вариант реализации и сроки.</p>
+        </div>
+        <a class="btn" href="mailto:3750997@mail.ru">Написать</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 ИП Вялков Егор Владимирович</span>
+    <a href="privacy.html">Политика конфиденциальности</a>
+  </div>
+</footer>
+
+<script src="solutions-data.js"></script>
+<script src="site.js"></script>
+<script>
+  (function () {
+    var data = window.SOLUTIONS || [];
+    var tabs = document.getElementById('tabs');
+    var catalog = document.getElementById('catalog');
+
+    function el(tag, cls, text) {
+      var n = document.createElement(tag);
+      if (cls) n.className = cls;
+      if (text) n.textContent = text;
+      return n;
+    }
+
+    function card(item) {
+      var c = el('div', 'sol');
+      var head = el('div', 'sol-head');
+      if (item.icon) {
+        var img = el('img', 'sol-icon');
+        img.src = item.icon;
+        img.alt = '';
+        img.loading = 'lazy';
+        head.appendChild(img);
+      }
+      var h3 = el('h3', '', item.page ? '' : item.name);
+      if (item.page) {
+        var tl = el('a', '', item.name);
+        tl.href = item.page;
+        h3.appendChild(tl);
+      }
+      head.appendChild(h3);
+      c.appendChild(head);
+      c.appendChild(el('p', '', item.description));
+      if (item.tags && item.tags.length) {
+        var ul = el('ul', 'tags');
+        item.tags.forEach(function (t) { ul.appendChild(el('li', '', t)); });
+        c.appendChild(ul);
+      }
+      var linkList = (item.page ? [{ label: 'Подробнее', url: item.page }] : []).concat(item.links || []);
+      if (linkList.length) {
+        var links = el('div', 'links');
+        linkList.forEach(function (l) {
+          var a = el('a', '', l.label);
+          a.href = l.url;
+          if (/^https?:/.test(l.url)) {
+            a.target = '_blank';
+            a.rel = 'noopener';
+          }
+          links.appendChild(a);
+        });
+        c.appendChild(links);
+      }
+      if (item.privacy) {
+        var pr = el('a', 'sol-privacy', 'Политика конфиденциальности');
+        pr.href = item.privacy;
+        c.appendChild(pr);
+      }
+      return c;
+    }
+
+    function addTab(id, label, count) {
+      var b = el('button', 'tab', label);
+      b.dataset.id = id;
+      b.appendChild(el('span', '', String(count)));
+      b.addEventListener('click', function () { location.hash = id; });
+      tabs.appendChild(b);
+    }
+
+    var total = 0;
+    data.forEach(function (cat) {
+      total += cat.items.length;
+      var s = el('div', 'cat');
+      s.id = 'cat-' + cat.id;
+      s.appendChild(el('h2', '', cat.title));
+      if (cat.description) s.appendChild(el('p', 'sub', cat.description));
+      if (cat.items.length) {
+        var grid = el('div', 'solutions');
+        cat.items.forEach(function (item) { grid.appendChild(card(item)); });
+        s.appendChild(grid);
+      } else {
+        s.appendChild(el('div', 'empty', 'Решения в этой категории скоро появятся.'));
+      }
+      catalog.appendChild(s);
+    });
+
+    addTab('all', 'Все', total);
+    data.forEach(function (cat) { addTab(cat.id, cat.title, cat.items.length); });
+
+    function show() {
+      var id = location.hash.slice(1);
+      if (!data.some(function (c) { return c.id === id; })) id = 'all';
+      Array.prototype.forEach.call(tabs.children, function (b) {
+        b.classList.toggle('active', b.dataset.id === id);
+      });
+      Array.prototype.forEach.call(catalog.querySelectorAll('.cat'), function (s) {
+        s.hidden = id !== 'all' && s.id !== 'cat-' + id;
+      });
+    }
+
+    window.addEventListener('hashchange', show);
+    show();
+  })();
+</script>
+</body>
+</html>
