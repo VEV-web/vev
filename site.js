@@ -20,8 +20,8 @@
 (function () {
   // Папка (или файл) на Яндекс.Диске и путь к установщику внутри неё.
   // Если выложите файл под другим именем — поправьте YA_FILE.
-  var YA_PUBLIC = 'https://disk.360.yandex.ru/d/XKh_OTRC-GVVWA';
-  var YA_FILE = '/APK Runner Setup 1.1.0.exe';
+  var YA_PUBLIC = 'https://disk.360.yandex.ru/d/uEF-xLoDvGDiyQ';
+  var YA_FILE = '';
 
   document.addEventListener('click', function (e) {
     var a = e.target.closest ? e.target.closest('a') : null;
