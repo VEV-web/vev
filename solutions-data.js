@@ -53,6 +53,17 @@ window.SOLUTIONS = [
     id: "desktop",
     title: "Программы для ПК",
     description: "Программы для Windows, macOS и Linux.",
-    items: []
+    items: [
+      {
+        name: "APK Runner",
+        description: "Запускает Android-приложения на компьютере с Windows. Откройте APK-файл — приложение установится, получит ярлык на рабочем столе и будет открываться в своём окне, как обычная программа. Телефон не нужен.",
+        icon: "img/apk-runner/icon.png",
+        page: "apk-runner.html",
+        tags: ["Windows 10 и 11", "64 бит"],
+        links: [
+          { label: "Скачать для Windows", url: "https://disk.360.yandex.ru/d/XKh_OTRC-GVVWA" }
+        ]
+      }
+    ]
   }
 ];
